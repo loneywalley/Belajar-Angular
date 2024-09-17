@@ -3,79 +3,129 @@ import { RouterOutlet } from '@angular/router';
 import { DataUser } from './app.entity';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
-import { GenerateRandomIdService } from '../button/generate-random-id.service';
 import { FormGroup, FormsModule, Validators, FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputComponent } from '../input/input.component';
+import { TableComponent } from '../table/table.component';
+
+
+// @Component({
+//   selector: 'app-root',
+//   standalone: true,
+//   imports: [RouterOutlet, CommonModule, ButtonComponent, FormsModule, ReactiveFormsModule],
+//   templateUrl: './app.component.html',
+//   styleUrl: './app.component.scss'
+// })
+// export class AppComponent {
+//   addUserForm: FormGroup;
+//   title: string = ''
+//   dataUser! : Array<DataUser>;
+
+//   constructor()
+//   {
+//     this.title = 'latihan'
+    // this.addUserForm = new FormGroup({
+    //   name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    //   email: new FormControl('', [Validators.required, Validators.email]),
+    //   city: new FormControl('', [Validators.required]),
+    //   province: new FormControl('', [Validators.required]),
+    //   zipCode: new FormControl('', [Validators.required])
+    // })
+//   }
+  // ngOnInit(): void {
+  //   this.dataUser = [{
+  //     name: 'tttttt',
+  //     email: 'ttttt@gmail.com',
+  //     address:
+  //     {
+  //       zipcode: 1,
+  //       city: 'dddddd',
+  //       province: 'aaaaaa'
+
+  //     }
+  //   }]
+  // }
+//   onSubmit(){
+//     // console.log('For Data:', this.addUserForm.value)
+    // this.dataUser.push(
+    //   {
+    //     name: this.addUserForm.get('name')?.value,
+    //     email: this.addUserForm.get('email')?.value,
+    //     address:
+    //     {
+    //       zipcode: this.addUserForm.get('zipCode')?.value,
+    //       city: this.addUserForm.get('city')?.value,
+    //       province: this.addUserForm.get('province')?.value,
+  
+    //     }
+    //   }
+    // )
+//     // console.log(this.addUserForm.get('name')?.value)
+//     // console.log(this.dataUser)
+//   }
+// }
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, ButtonComponent, FormsModule, ReactiveFormsModule],
+  imports: [RouterOutlet, 
+    CommonModule, 
+    ButtonComponent, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    InputComponent, 
+    TableComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-  title = 'belajar-angular';
-  dataUser! : DataUser;
-  randomId: string;
-  labelButton1 = "sikat"
-  labelButton2 = "gas"
-  triggerForParentName: string =""
-  backgroundColor: string = 'yellow'
-  name: string = ""
-  updatedName: string = ""
-  addUserForm: FormGroup
+export class AppComponent {
+  addUserForm: FormGroup;
+  dataUsers! : Array<DataUser>;
 
   constructor(
-    private randomIdService: GenerateRandomIdService
-  ){
-    this.randomId = this.randomIdService.generateId();
+  ) {
     this.addUserForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3), 
+        Validators.pattern('^[A-Z][a-zA-Z ]*$')]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phoneNumber: new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(13)])
+      city: new FormControl('', [Validators.required, Validators.pattern('^[A-Z][a-zA-Z ]*$')]),
+      province: new FormControl('', [Validators.required, 
+        Validators.pattern('^[A-Z][a-zA-Z ]*$')]),
+      zipCode: new FormControl('', [Validators.required, 
+        Validators.pattern('[0-9]*$'), 
+        Validators.minLength(5), 
+        Validators.maxLength(5)])
     })
   }
 
-  @HostListener('mouseenter') onMouseEnter(){
-    this.backgroundColor = 'pink';
-  }
-
-  @HostListener('mouseleave') onMouseLeave(){
-    this.backgroundColor = 'black';
+  submitForm() {
+    this.dataUsers.push(
+      {
+        name: this.addUserForm.get('name')?.value,
+        email: this.addUserForm.get('email')?.value,
+        address:
+        {
+          zipcode: this.addUserForm.get('zipCode')?.value,
+          city: this.addUserForm.get('city')?.value,
+          province: this.addUserForm.get('province')?.value,
+  
+        }
+      }
+    )
   }
 
   ngOnInit(): void {
-    this.title = 'belajar';
-    this.dataUser = {
-      name: 'bram',
-      age: 23,
-      address: 
-      [{
-        zipcode: 1,
-        provinces: 'Bali',
-        city: 'Denpasar',
-        district: 'Penatih'
-      },
+    this.dataUsers = [{
+      name: 'tttttt',
+      email: 'ttttt@gmail.com',
+      address:
       {
-        zipcode: 2,
-        provinces: 'Jawa Timur',
-        city: 'Surabaya',
-        district: 'Rungkut'
-      }]
-    }
-  }
-  eventFromParent(event: any) {
-    console.log(event);
-    this.labelButton1 = event;
-    this.labelButton2 = event;
-  }
-  updateName(event: any) {
-    this.name = event
-  }
+        zipcode: 1,
+        city: 'dddddd',
+        province: 'aaaaaa'
 
-  onSubmit(){
-    console.log('For Data:', this.addUserForm.value)
+      }
+    }]
   }
 }

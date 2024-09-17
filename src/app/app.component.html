@@ -1,52 +1,81 @@
-<div class="container">
-  <h2 class="title" [style]="{color: backgroundColor}">
-    {{title}}
+<!-- <div class="container">
+  <h2 class="input">
+      Please Input Your Data
   </h2>
-  <p class="desc">
-    {{dataUser.name}}
-    {{dataUser.address[0].provinces}}
-  </p>
-  <div class="address" *ngFor="let address of dataUser.address">
-    {{address.city}}
-  </div>
-  {{randomId}}
-  <input placeholder="enter your name" [(ngModel)]="name">
-  <p>Your name  is : {{name}}</p>
-
-  <button (click)="updateName('Darma')">Change to Darma</button>
-
-  <app-button [buttonLabel] = "labelButton1" (submitButton)="eventFromParent($event)" [dataFoChild]="dataUser"></app-button>
-  <!-- <app-button [buttonLabel] = "labelButton2" [dataFoChild]="dataUser"></app-button> -->
-
   <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
-    <label for="name">
+      <label for="name">
       Name: 
-    </label>
-    <input id="name" formControlName="name" placeholder="Please input your name">
-    <div class="validation-error" *ngIf="addUserForm.get('name')?.invalid && addUserForm.get('name')?.touched">
+      </label>
+      <input id="name" formControlName="name" placeholder="Please input your name">
+      <div class="validation-error" *ngIf="addUserForm.get('name')?.invalid && addUserForm.get('name')?.touched">
       Name Required
-    </div>
-    <br>
-    <label for="email">
+      </div>
+      <br>
+      <label for="email">
       Email:
-    </label>
-    <input id="email" formControlName="email" placeholder="Please input your email">
-    <div class="validation-error" *ngIf="addUserForm.get('email')?.invalid && addUserForm.get('email')?.touched">
+      </label>
+      <input id="email" formControlName="email" placeholder="Please input your email">
+      <div class="validation-error" *ngIf="addUserForm.get('email')?.invalid && addUserForm.get('email')?.touched">
       Valid email Required
-    </div> 
-    <br>
-    <label for="phoneNumber">
-      Phone Number:
-    </label>
-    <input id="phoneNumber" formControlName="phoneNumber" placeholder="Please input your phone number">
-    <div class="validation-error" *ngIf="addUserForm.get('phoneNumber')?.invalid && addUserForm.get('phoneNumber')?.touched">
-      Phone number minimal 9 digits and maximal 13 digits
-    </div> 
-    <br>
-    <button type="submit" [disabled]="addUserForm.invalid">
+      </div> 
+      <br>
+      <label for="city">
+      City:
+      </label>
+      <input id="city" formControlName="city" placeholder="Please input your city">
+      <div class="validation-error" *ngIf="addUserForm.get('city')?.invalid && addUserForm.get('city')?.touched">
+          Please fill city column
+      </div> 
+      <br>
+      <label for="province">
+          Province:
+      </label>
+      <input id="province" formControlName="province" placeholder="Please input your province">
+      <div class="validation-error" *ngIf="addUserForm.get('province')?.invalid && addUserForm.get('province')?.touched">
+          Please fill province column
+      </div>
+      <br>
+      <label for="zipCode">
+          Zip Code:
+      </label>
+      <input id="zipCode" formControlName="zipCode" placeholder="Please input your zip code">
+      <div class="validation-error" *ngIf="addUserForm.get('zipCode')?.invalid && addUserForm.get('zipCode')?.touched">
+          Please fill zip code column
+      </div>
+      <br> 
+      <button type="submit" [disabled]="addUserForm.invalid">
       Submit
-    </button>
-
+      </button>
   </form>
 
-</div>
+  <table class="user-table">
+      <thead>
+          <tr>
+            <th>
+              No
+            </th>
+              <th>
+                  Nama
+              </th>
+              <th>
+                  Email
+              </th>
+              <th>
+                  Address
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let data of dataUser; index as i">
+            <td>{{i + 1}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.address.province}}, {{data.address.city}}, {{data.address.zipcode}}</td>
+          </tr>
+      </tbody>
+  </table>
+</div> -->
+
+
+<app-input [formGroup]="addUserForm" (onSubmit)="submitForm()"></app-input>
+<app-table [dataUsers]="dataUsers"></app-table>

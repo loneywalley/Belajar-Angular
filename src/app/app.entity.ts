@@ -1,17 +1,11 @@
 export interface DataUser{
-    name : string
-    age : number
-    address : Array<Address>
+    name: string
+    email: string
+    address : Address
 }
 
 interface Address{
-    zipcode? : number
-    district : string
+    zipcode : number
     city : string
-    provinces : string
-}
-
-export interface addUser{
-    name: string
-    email: string
+    province : string
 }

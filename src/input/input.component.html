@@ -1,0 +1,51 @@
+<div class="container">
+    <h2 class="title">
+        Please Input Your Data
+    </h2>
+    <form [formGroup]="formGroup">
+        <label for="name">
+        Name: 
+        </label>
+        <input id="name" formControlName="name" placeholder="Please input your name">
+        <div class="validation-error" *ngIf="formGroup.get('name')?.invalid && formGroup.get('name')?.touched">
+        Name Required and first aplphabet must upper case
+        </div>
+        <br>
+        <label for="email">
+        Email:
+        </label>
+        <input id="email" formControlName="email" placeholder="Please input your email">
+        <div class="validation-error" *ngIf="formGroup.get('email')?.invalid && formGroup.get('email')?.touched">
+        Valid email Required
+        </div> 
+        <br>
+        <label for="city">
+        City:
+        </label>
+        <input id="city" formControlName="city" placeholder="Please input your city">
+        <div class="validation-error" *ngIf="formGroup.get('city')?.invalid && formGroup.get('city')?.touched">
+            Please fill city column and first aplphabet must upper case
+        </div> 
+        <br>
+        <label for="province">
+            Province:
+        </label>
+        <input id="province" formControlName="province" placeholder="Please input your province">
+        <div class="validation-error" *ngIf="formGroup.get('province')?.invalid && formGroup.get('province')?.touched">
+            Please fill province column and first aplphabet must upper case
+        </div>
+        <br>
+        <label for="zipCode">
+            Zip Code:
+        </label>
+        <input id="zipCode" formControlName="zipCode" placeholder="Please input your zip code">
+        <div class="validation-error" *ngIf="formGroup.get('zipCode')?.invalid && formGroup.get('zipCode')?.touched">
+            Please fill zip code column and must 5 digit numbers
+        </div>
+        <br> 
+        <button (click)="submitForm()" [disabled]="formGroup.invalid">
+        Submit
+        </button>
+    </form>
+</div>
+  

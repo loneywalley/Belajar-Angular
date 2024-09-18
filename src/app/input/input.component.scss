@@ -1,29 +1,58 @@
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 300px;
-  }
+// form {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 10px;
+//     width: 300px;
+//   }
   
-  input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
+//   input {
+//     padding: 10px;
+//     border: 1px solid #ccc;
+//     border-radius: 5px;
+//     font-size: 14px;
+//   }
   
-  button {
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+//   button {
+//     padding: 10px;
+//     background-color: #4caf50;
+//     color: white;
+//     border: none;
+//     border-radius: 5px;
+//     font-size: 16px;
+//     cursor: pointer;
   
-    &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-  }
+//     &:disabled {
+//       background-color: #ccc;
+//       cursor: not-allowed;
+//     }
+//   }
+
+
+.completed {
+  text-decoration: line-through;
+}
+
+.highlight {
+  background-color: red;
+  color: white;
+}
+
+.snackbar {
+  visibility: visible;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.snackbar.hide {
+  visibility: hidden;
+}
+
   

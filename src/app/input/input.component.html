@@ -43,9 +43,21 @@
             Please fill zip code column and must 5 digit numbers
         </div>
         <br> 
+        <label for="paymentDate">
+            Payment Detail:
+        </label>
+        <input id="paymentDate" formControlName="paymentDate" placeholder="Please input your payment date">
+        <div class="validation-error" *ngIf="formGroup.get('paymentDate')?.invalid && formGroup.get('paymentDate')?.touched">
+            Please fill payment date
+        </div>
+        <br>
         <button (click)="submitForm()" [disabled]="formGroup.invalid">
         Submit
         </button>
     </form>
 </div>
+
+
+
+
   

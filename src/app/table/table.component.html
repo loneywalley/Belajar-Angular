@@ -5,14 +5,29 @@
         <th>Name</th>
         <th>Email</th>
         <th>Address</th>
+        <th>Payment Date</th>
+        <th>Check Box</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of dataUsers; let i = index">
+      <tr *ngFor="let user of dataUsers; let i = index" [class.strikethrough]="user.checked">
         <td>{{ i + 1 }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.address.province }}, {{user.address.city}}, {{user.address.zipcode}}</td>
+        <td>{{ user.paymentDate | customDate }}</td>
+        <td>
+          <input type="checkbox" (change)="toggleCheck(i)" [checked]="user.checked" />
+        </td>
+        <td>
+          <button (click)="deleteUser(i)" (click)="trigger('Delete Sucsessfull', '')">🗑️</button>
+        </td>
+      </tr>
+      <tr *ngIf="dataUsers.length === 0">
+        <td colspan="3">There is no data</td>
       </tr>
     </tbody>
   </table>
+
+  

@@ -26,4 +26,11 @@ table {
   
   .strikethrough {
     text-decoration: line-through;
+    background-color: white;
+    color: black;
+  }
+
+  tr.highlight {
+    background-color: red;
+    color: white;
   }

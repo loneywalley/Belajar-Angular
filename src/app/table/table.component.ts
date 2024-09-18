@@ -25,8 +25,7 @@ export class TableComponent {
     }
     paymentDate: Date;
     checked: boolean;
-  }> = []
-  todayDate: Date = new Date();
+  }> = [];
   constructor(private userData: GetService, private snackBarService : SnackBarService){}
     deleteUser(index: number) {
       this.userData.deleteUser(index);
@@ -41,8 +40,10 @@ export class TableComponent {
      this.snackBarService.openSnackBar(message, action); 
     }
 
-    dateDifference(date: Date): number{
-      const res = this.todayDate.getDate() - date.getDate();
-      return res
+    isHighlight(datePayment: Date): boolean {
+      const today = new Date();
+      const diffInTime = today.getTime() - new Date(datePayment).getTime();
+      const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+      return diffInDays <= 3 && diffInDays >= -3;
     }
   }

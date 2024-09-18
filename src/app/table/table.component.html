@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of dataUsers; let i = index" [class.strikethrough]="user.checked">
+      <tr *ngFor="let user of dataUsers; let i = index" [class.strikethrough]="user.checked" [ngClass]="{'highlight': isHighlight(user.paymentDate)}">
         <td>{{ i + 1 }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>

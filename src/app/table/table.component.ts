@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataUser } from '../app/app.entity';
+import { DataUser } from '../app.entity';
 
 @Component({
   selector: 'app-table',

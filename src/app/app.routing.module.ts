@@ -9,8 +9,7 @@ const routes: Routes = [
     { path: 'add', component:InputComponent },
     { path: 'detail/{id}', component: InputComponent },
     { path: 'detail', component: InputComponent },
-    { path: 'no-data', component: NoDataPageComponent },
-    { path: '**', redirectTo: '' }
+    { path: '**', component: NoDataPageComponent }
 ];
 
 @NgModule({

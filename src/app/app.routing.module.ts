@@ -6,7 +6,8 @@ import { NoDataPageComponent } from './no-data-page/no-data-page.component';
 
 const routes: Routes = [
     { path: '', component: TableComponent },
-    { path: 'detail/:id', component: InputComponent },
+    { path: 'add', component:InputComponent },
+    { path: 'detail/{id}', component: InputComponent },
     { path: 'detail', component: InputComponent },
     { path: 'no-data', component: NoDataPageComponent },
     { path: '**', redirectTo: '' }

@@ -80,7 +80,6 @@ import { HttpServiceService } from '../service/http-service.service';
 export class TableComponent implements OnInit {
   data: any[] = [];
   selectedRows = new Set<any>();
-  displayedColumns: string[] = ['select', 'id', 'name', 'actions'];
 
   constructor(private apiService: HttpServiceService, private snackBar: MatSnackBar, private router: Router) { }
 

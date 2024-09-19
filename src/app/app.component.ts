@@ -1,15 +1,16 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { DataUser } from './app.entity';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button/button.component';
-import { FormGroup, FormsModule, Validators, FormControl, NgModel } from '@angular/forms';
+import { FormGroup, FormsModule, Validators, FormControl, NgModel, FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from './input/input.component';
 import { TableComponent } from './table/table.component';
 // import { GetService } from './service/get-service.service';
 import { HttpServiceService } from './service/http-service.service';
 import { CustomDatePipe } from '../Pipe/user-pipe';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 // @Component({
@@ -116,14 +117,14 @@ import { CustomDatePipe } from '../Pipe/user-pipe';
 //   //     // this.dataUsers = this.getService.getUsers(); }
 //   //   }
 //   // }
-//     fetchData(){
-//       this.getService.getData().subscribe((res: any) => {
-//         console.log(res)
-//         this.dataUsers = res
-//       }, (err: any) => {
-//         console.log("errorrrrrrrrr",err)
-//       })
-//     }
+    // fetchData(){
+    //   this.getService.getData().subscribe((res: any) => {
+    //     console.log(res)
+    //     this.dataUsers = res
+    //   }, (err: any) => {
+    //     console.log("errorrrrrrrrr",err)
+    //   })
+    // }
 
 //     createuser(event: any){
 //       // const payLoad = {
@@ -166,14 +167,85 @@ import { CustomDatePipe } from '../Pipe/user-pipe';
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule, RouterModule, RouterOutlet],
   styleUrls: ['./app.component.scss']
   
 })
 export class AppComponent {
-  title = 'Your Application Name'; // Set a title for the application
+  title = 'Your Application Name'; 
 
   constructor() {
-    // Any global initialization can go here
   }
 }
+
+//   form: FormGroup;
+//   isEditMode = false;
+//   dataUsers: Array<DataUser> = [];
+//   id: number | null = null;
+
+//   constructor(
+//     private fb: FormBuilder,
+//     private apiService: HttpServiceService,
+//     private route: ActivatedRoute,
+//     private router: Router,
+//     private snackBar: MatSnackBar
+//   ) {
+//     this.form = this.fb.group({
+//       name: ['', [Validators.required, Validators.minLength(3)]],
+//       email: ['', [Validators.required, Validators.email]],
+//       city: ['', Validators.required],
+//       province: ['', Validators.required],
+//       zipcode: ['', Validators.required],
+//       basicSalary: ['', Validators.required],
+//       userName: ['', Validators.required]
+//     });
+//   }
+
+//   ngOnInit(): void {
+//     this.route.paramMap.subscribe(params => {
+//       const id = params.get('id');
+//       if (id) {
+//         this.id = +id;
+//         this.isEditMode = true;
+//         this.loadData();
+//       }
+//     });
+//   }
+
+//   fetchData(){
+//     this.apiService.getData().subscribe((res: any) => {
+//       console.log(res)
+//       this.dataUsers = res
+//     }, (err: any) => {
+//       console.log("errorrrrrrrrr",err)
+//     })
+//   }
+
+//   loadData(): void {
+//     if (this.id) {
+//       this.apiService.getDataById(this.id).subscribe(
+//         (data) => this.form.patchValue(data),
+//         (error) => console.error('Error fetching data', error)
+//       );
+//     }
+//   }
+
+//   onSubmit(): void {
+//     if (this.isEditMode) {
+//       this.apiService.updateData(this.id!, this.form.value).subscribe(
+//         () => this.onSuccess('Data updated successfully'),
+//         (error) => console.error('Error updating data', error)
+//       );
+//     } else {
+//       this.apiService.addData(this.form.value).subscribe(
+//         () => this.onSuccess('Data added successfully'),
+//         (error) => console.error('Error adding data', error)
+//       );
+//     }
+//   }
+
+//   onSuccess(message: string): void {
+//     this.snackBar.open(message, '', { duration: 2000 });
+//     this.router.navigate(['/']);
+//   }
+// }

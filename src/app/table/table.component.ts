@@ -2,8 +2,10 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataUser } from '../app.entity';
 import { CustomDatePipe } from '../Pipe/user-pipe';
-import { GetService } from '../service/get-service.service';
-import { SnackBarService} from '../snackBar/snack-bar.service'
+// import { GetService } from '../service/get-service.service';
+import { SnackBarService} from '../snackBar/snack-bar.service';
+// import { ApproutingModule } from '../app.routing.module';
+import { HttpServiceService } from '../service/http-service.service';
 
 @Component({
   selector: 'app-table',
@@ -15,24 +17,27 @@ import { SnackBarService} from '../snackBar/snack-bar.service'
   styleUrl: './table.component.scss'
 })
 export class TableComponent {
-  @Input() dataUsers: Array<{
-    name: string;
-    email: string;
-    address: {
-      zipcode: number;
-      city: string;
-      province: string;
-    }
-    paymentDate: Date;
-    checked: boolean;
-  }> = [];
-  constructor(private userData: GetService, private snackBarService : SnackBarService){}
+  // @Input() dataUsers: Array<{
+  //   name: string;
+  //   email: string;
+  //   address: {
+  //     zipcode: number;
+  //     city: string;
+  //     province: string;
+  //   }
+  //   paymentDate: Date;
+  //   checked: boolean;
+  // }> = [];
+
+@Input() dataUsers: Array<DataUser> = [];
+
+  constructor(private userData: HttpServiceService, private snackBarService : SnackBarService){}
     deleteUser(index: number) {
-      this.userData.deleteUser(index);
+      // this.userData.deleteUser(index);
     }
   
     toggleCheck(index: number) {
-      this.userData.toggleCheck(index);
+      // this.userData.toggleCheck(index);
     }
 
     trigger(message:string, action:string) 

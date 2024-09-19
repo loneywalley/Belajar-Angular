@@ -6,19 +6,23 @@
         <th>Email</th>
         <th>Address</th>
         <th>Payment Date</th>
+        <th>Username</th>
+        <th>Basic Salary</th>
         <th>Check Box</th>
         <th>Delete</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of dataUsers; let i = index" [class.strikethrough]="user.checked" [ngClass]="{'highlight': isHighlight(user.paymentDate)}">
+      <tr *ngFor="let user of dataUsers; let i = index" [class.strikethrough]="user.isChecked" [ngClass]="{'highlight': isHighlight(user.paymentDeadline)}">
         <td>{{ i + 1 }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.address.province }}, {{user.address.city}}, {{user.address.zipcode}}</td>
-        <td>{{ user.paymentDate | customDate }}</td>
+        <td>{{ user.province }}, {{user.city}}, {{user.zipcode}}</td>
+        <td>{{ user.paymentDeadline | customDate }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.basicSalary }}</td>
         <td>
-          <input type="checkbox" (change)="toggleCheck(i)" [checked]="user.checked" />
+          <input type="checkbox" (change)="toggleCheck(i)" [checked]="user.isChecked" />
         </td>
         <td>
           <button (click)="deleteUser(i)" (click)="trigger('Delete Sucsessfull', '')">🗑️</button>

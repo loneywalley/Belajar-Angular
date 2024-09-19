@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpServiceService } from '../service/http-service.service';
+// import { ApproutingModule } from '../app.routing.module';
 
 @Component({
   selector: 'app-input',
@@ -17,7 +19,8 @@ export class InputComponent {
   @Input() formGroup!: FormGroup;
   @Output() onSubmit = new EventEmitter<void>();
 
-  submitForm() {
+  submitData() {
     this.onSubmit.emit();
   }
+
 }

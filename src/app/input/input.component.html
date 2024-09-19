@@ -47,11 +47,27 @@
             Payment Detail:
         </label>
         <input id="paymentDate" formControlName="paymentDate" placeholder="Please input your payment date" type="date">
-        <div class="validation-error" *ngIf="formGroup.get('paymentDate')?.invalid && formGroup.get('paymentDate')?.touched">
+        <div class="validation-error" *ngIf="formGroup.get('paymentDeadline')?.invalid && formGroup.get('paymentDeadline')?.touched">
             Please fill payment date
         </div>
         <br>
-        <button (click)="submitForm()" [disabled]="formGroup.invalid">
+        <label for="username">
+            Username
+        </label>
+        <input id="username" formControlName="username" placeholder="Please input your username">
+        <div class="validation-error" *ngIf="formGroup.get('username')?.invalid && formGroup.get('username')?.touched">
+            Please fill username
+        </div>
+        <br>
+        <label for="basicSalary">
+            Basic Salary :
+        </label>
+        <input id="basicSalary" formControlName="basicSalary" placeholder="Please input your basic salary">
+        <div class="validation-error" *ngIf="formGroup.get('basicSalary')?.invalid && formGroup.get('basicSalary')?.touched">
+            Please fill basic salary
+        </div>
+        <br>
+        <button (click)="submitData()" [disabled]="formGroup.invalid">
         Submit
         </button>
     </form>

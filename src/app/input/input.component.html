@@ -2,12 +2,12 @@
     <h2 class="title">
         Please Input Your Data
     </h2>
-    <form [formGroup]="formGroup">
+    <form [formGroup]="form">
         <label for="name">
         Name: 
         </label>
         <input id="name" formControlName="name" placeholder="Please input your name">
-        <div class="validation-error" *ngIf="formGroup.get('name')?.invalid && formGroup.get('name')?.touched">
+        <div class="validation-error" **ngIf="formGroup.get('name')?.invalid && formGroup.get('name')?.touched">
         Name Required and first aplphabet must upper case
         </div>
         <br>
@@ -15,7 +15,7 @@
         Email:
         </label>
         <input id="email" formControlName="email" placeholder="Please input your email">
-        <div class="validation-error" *ngIf="formGroup.get('email')?.invalid && formGroup.get('email')?.touched">
+        <div class="validation-error" **ngIf="formGroup.get('email')?.invalid && formGroup.get('email')?.touched">
         Valid email Required
         </div> 
         <br>
@@ -23,7 +23,7 @@
         City:
         </label>
         <input id="city" formControlName="city" placeholder="Please input your city">
-        <div class="validation-error" *ngIf="formGroup.get('city')?.invalid && formGroup.get('city')?.touched">
+        <div class="validation-error" **ngIf="formGroup.get('city')?.invalid && formGroup.get('city')?.touched">
             Please fill city column and first aplphabet must upper case
         </div> 
         <br>
@@ -31,7 +31,7 @@
             Province:
         </label>
         <input id="province" formControlName="province" placeholder="Please input your province">
-        <div class="validation-error" *ngIf="formGroup.get('province')?.invalid && formGroup.get('province')?.touched">
+        <div class="validation-error" **ngIf="formGroup.get('province')?.invalid && formGroup.get('province')?.touched">
             Please fill province column and first aplphabet must upper case
         </div>
         <br>
@@ -39,7 +39,7 @@
             Zip Code:
         </label>
         <input id="zipCode" formControlName="zipCode" placeholder="Please input your zip code">
-        <div class="validation-error" *ngIf="formGroup.get('zipCode')?.invalid && formGroup.get('zipCode')?.touched">
+        <div class="validation-error" **ngIf="formGroup.get('zipCode')?.invalid && formGroup.get('zipCode')?.touched">
             Please fill zip code column and must 5 digit numbers
         </div>
         <br> 
@@ -47,7 +47,7 @@
             Payment Detail:
         </label>
         <input id="paymentDate" formControlName="paymentDate" placeholder="Please input your payment date" type="date">
-        <div class="validation-error" *ngIf="formGroup.get('paymentDeadline')?.invalid && formGroup.get('paymentDeadline')?.touched">
+        <div class="validation-error" **ngIf="formGroup.get('paymentDeadline')?.invalid && formGroup.get('paymentDeadline')?.touched">
             Please fill payment date
         </div>
         <br>
@@ -55,7 +55,7 @@
             Username
         </label>
         <input id="username" formControlName="username" placeholder="Please input your username">
-        <div class="validation-error" *ngIf="formGroup.get('username')?.invalid && formGroup.get('username')?.touched">
+        <div class="validation-error" **ngIf="formGroup.get('username')?.invalid && formGroup.get('username')?.touched">
             Please fill username
         </div>
         <br>
@@ -63,12 +63,15 @@
             Basic Salary :
         </label>
         <input id="basicSalary" formControlName="basicSalary" placeholder="Please input your basic salary">
-        <div class="validation-error" *ngIf="formGroup.get('basicSalary')?.invalid && formGroup.get('basicSalary')?.touched">
+        <div class="validation-error" **ngIf="formGroup.get('basicSalary')?.invalid && formGroup.get('basicSalary')?.touched">
             Please fill basic salary
         </div>
         <br>
-        <button (click)="submitData()" [disabled]="formGroup.invalid">
+        <!-- <button (click)="submitData()" [disabled]="form.invalid">
         Submit
+        </button> -->
+        <button type="submit" [disabled]="form.invalid">
+            {{ isEditMode ? 'Save Changes' : 'Submit' }}
         </button>
     </form>
 </div>
@@ -76,4 +79,19 @@
 
 
 
+  
+
+   <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input formControlName="name" placeholder="Input your name" />
+    <input formControlName="email" placeholder="Input your email" />
+    <input formControlName="city" placeholder="Input your city" />
+    <input formControlName="province" placeholder="Input your province" />
+    <input formControlName="zipcode" placeholder="Input your zipcode" />
+    <input formControlName="paymentDeadline" type="date" placeholder="Payment Deadline" />
+    input
+  
+    <button type="submit" [disabled]="form.invalid">
+      {{ isEditMode ? 'Save Changes' : 'Submit' }}
+    </button>
+  </form> -->
   

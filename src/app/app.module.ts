@@ -1,7 +1,7 @@
 // import { NgModule } from '@angular/core';
 // import { BrowserModule } from '@angular/platform-browser';
 // import { AppComponent } from './app.component';
-// import { ApproutingModule } from './app.routing.module';  // Import your routing module
+// import { AppRoutingModule } from './app.routing.module';  // Import your routing module
 // import { InputComponent } from './input/input.component';
 // import { TableComponent } from './table/table.component';
 
@@ -13,7 +13,7 @@
 //   ],
 //   imports: [
 //     BrowserModule,
-//     ApproutingModule  // Import the routing module here
+//     AppRoutingModule  // Import the routing module here
 //   ],
 //   providers: [],
 //   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-<table>
+<!-- <table>
     <thead>
       <tr>
         <th>No.</th>
@@ -13,8 +13,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of dataUsers; let i = index" [class.strikethrough]="user.isChecked" [ngClass]="{'highlight': isHighlight(user.paymentDeadline)}">
-        <td>{{ i + 1 }}</td>
+      <tr *ngFor="let user of dataUsers; let id = index" [class.strikethrough]="user.isChecked" [ngClass]="{'highlight': isHighlight(user.paymentDeadline)}">
+        <td>{{ id + 1 }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.province }}, {{user.city}}, {{user.zipcode}}</td>
@@ -22,10 +22,10 @@
         <td>{{ user.username }}</td>
         <td>{{ user.basicSalary }}</td>
         <td>
-          <input type="checkbox" (change)="toggleCheck(i)" [checked]="user.isChecked" />
+          <input type="checkbox" (change)="toggleCheck(id)" [checked]="user.isChecked" />
         </td>
         <td>
-          <button (click)="deleteUser(i)" (click)="trigger('Delete Sucsessfull', '')">🗑️</button>
+          <button (click)="deleteUser(id)" (click)="trigger('Delete Sucsessfull', '')">🗑️</button>
         </td>
       </tr>
       <tr *ngIf="dataUsers.length === 0">
@@ -34,4 +34,42 @@
     </tbody>
   </table>
 
+   -->
+
+
+   <table>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Payment Deadline</th>
+        <th>Username</th>
+        <th>Basic Salary</th>
+        <th>Action</th>
+        <th>Completed?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data; let i = index" [ngClass]="{ completed: row.completed }">
+        <td>{{ i + 1 }}</td>
+        <td>{{ row.name }}</td>
+        <td>{{ row.email }}</td>
+        <td>{{ row.city }}, {{ row.province }}, {{ row.zipcode }}</td>
+        <td>{{ row.paymentDeadline }}</td>
+        <td>{{ row.username }}</td>
+        <td>{{ row.basicSalary }}</td>
+        <td>
+          <button (click)="onEdit(row.id)">Edit</button>
+          <button (click)="onDelete(row.id)">Delete</button>
+        </td>
+        <td>
+          <input type="checkbox" [checked]="row.completed" (change)="onCheckboxChange(row, $event)" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button (click)="onAdd()">Add New</button>
   

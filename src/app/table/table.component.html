@@ -52,7 +52,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of data; let i = index" [ngClass]="{ completed: row.completed }">
+      <tr *ngFor="let row of data; let i = index" [ngClass]="{ completed: row.completed }" [ngClass]="{'highlight': isHighlight(row.paymentDeadline)}">
         <td>{{ i + 1 }}</td>
         <td>{{ row.name }}</td>
         <td>{{ row.email }}</td>

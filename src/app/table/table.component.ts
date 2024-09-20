@@ -54,12 +54,12 @@
 //      this.snackBarService.openSnackBar(message, action); 
 //     }
 
-//     isHighlight(datePayment: Date): boolean {
-//       const today = new Date();
-//       const diffInTime = today.getTime() - new Date(datePayment).getTime();
-//       const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
-//       return diffInDays <= 3 && diffInDays >= -3;
-//     }
+    // isHighlight(datePayment: Date): boolean {
+    //   const today = new Date();
+    //   const diffInTime = today.getTime() - new Date(datePayment).getTime();
+    //   const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+    //   return diffInDays <= 3 && diffInDays >= -3;
+    // }
 //   }
 
 
@@ -132,4 +132,12 @@ export class TableComponent implements OnInit {
       (error) => console.error('Error deleting data', error)
     );
   }
+
+  isHighlight(datePayment: Date): boolean {
+    const today = new Date();
+    const diffInTime = today.getTime() - new Date(datePayment).getTime();
+    const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+    return diffInDays <= 3 && diffInDays >= -3;
+  }
+
 }

@@ -23,5 +23,5 @@ export interface DataUser{
     basicSalary:     number;
     zipcode:         string;
     isChecked?:       boolean;
-    id:              string;
+    id:              number;
 }

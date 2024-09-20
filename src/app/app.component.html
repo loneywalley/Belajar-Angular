@@ -86,5 +86,20 @@
     <a routerLink="/add">Add Data</a>
 </nav> -->
 
-    <router-outlet></router-outlet>
+    <!-- <router-outlet></router-outlet> -->
   
+
+    <div class="app-container">
+        <header>
+          <h1>{{ title }}</h1>
+          <nav>
+            <a routerLink="/">Home</a>
+            <a routerLink="/add">Add New Data</a>
+          </nav>
+        </header>
+      
+        <main>
+          <router-outlet></router-outlet> <!-- This will load the routed components -->
+        </main>
+      </div>
+      

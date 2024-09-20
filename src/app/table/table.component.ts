@@ -63,13 +63,94 @@
 //   }
 
 
+// import { Component, OnInit } from '@angular/core';
+// import { DataService } from '../service/data.service';
+// import { Router, RouterModule, RouterOutlet } from '@angular/router';
+// import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+// import { CommonModule } from '@angular/common';
+// import { HttpClient } from '@angular/common/http';
+// import { HttpServiceService } from '../service/http-service.service';
+
+// @Component({
+//   selector: 'app-table',
+//   templateUrl: './table.component.html',
+//   standalone: true,
+//   imports: [CommonModule, MatSnackBarModule, RouterModule, RouterOutlet]
+// })
+// export class TableComponent implements OnInit {
+//   data: any[] = [];
+//   selectedRows = new Set<any>();
+
+//   constructor(private apiService: HttpServiceService, private snackBar: MatSnackBar, private router: Router) { }
+
+//   ngOnInit(): void {
+//     this.loadData();
+//   }
+
+//   loadData(): void {
+//     this.apiService.getData().subscribe(
+//       (data) => this.data = data,
+//       (error) => console.error('Error fetching data', error)
+//     );
+//   }
+
+//   onEdit(id: number): void {
+//     this.router.navigate([`/detail/${id}`]);
+//   }
+
+//   onAdd(): void {
+//     this.router.navigate(['/add']);
+//   }
+
+
+//   onCheckboxChange(row: any, event: any) {
+//     if (event.checked) {
+//       this.selectedRows.add(row);
+//     } else {
+//       this.selectedRows.delete(row);
+//     }
+//   }
+
+//   toggleAllRows(event: any) {
+//     if (event.checked) {
+//       this.data.forEach(row => this.selectedRows.add(row));
+//     } else {
+//       this.selectedRows.clear();
+//     }
+//   }
+
+//   isChecked(row: any): boolean {
+//     return this.selectedRows.has(row);
+//   }
+
+//   onDelete(id: number): void {
+//     this.apiService.deleteData(id).subscribe(
+//       () => {
+//         this.loadData();
+//         this.snackBar.open('Data deleted successfully', '', { duration: 2000 });
+//       },
+//       (error) => console.error('Error deleting data', error)
+//     );
+//   }
+
+//   isHighlight(datePayment: Date): boolean {
+//     const today = new Date();
+//     const diffInTime = today.getTime() - new Date(datePayment).getTime();
+//     const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+//     return diffInDays <= 3 && diffInDays >= -3;
+//   }
+
+// }
+
+
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../service/data.service';
+import { HttpServiceService } from '../service/http-service.service';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { HttpServiceService } from '../service/http-service.service';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { LogoutComponent } from '../pages/logout/logout.component';
 
 @Component({
   selector: 'app-table',
@@ -78,19 +159,28 @@ import { HttpServiceService } from '../service/http-service.service';
   imports: [CommonModule, MatSnackBarModule, RouterModule, RouterOutlet]
 })
 export class TableComponent implements OnInit {
-  data: any[] = [];
-  selectedRows = new Set<any>();
+  data: any[] = [];  // Define proper type if you know the structure
+  selectedRows = new Set<any>();  // Use a specific type for better type safety
 
-  constructor(private apiService: HttpServiceService, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(
+    private apiService: HttpServiceService, 
+    private snackBar: MatSnackBar, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadData();
   }
 
   loadData(): void {
-    this.apiService.getData().subscribe(
-      (data) => this.data = data,
-      (error) => console.error('Error fetching data', error)
+    this.apiService.getData().pipe(
+      catchError((error) => {
+        console.error('Error fetching data', error);
+        this.snackBar.open('Error loading data', '', { duration: 3000 });
+        return new Observable<any[]>(); // Return an empty observable in case of error
+      })
+    ).subscribe(
+      (data) => this.data = data
     );
   }
 
@@ -102,8 +192,7 @@ export class TableComponent implements OnInit {
     this.router.navigate(['/add']);
   }
 
-
-  onCheckboxChange(row: any, event: any) {
+  onCheckboxChange(row: any, event: any): void {
     if (event.checked) {
       this.selectedRows.add(row);
     } else {
@@ -111,7 +200,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  toggleAllRows(event: any) {
+  toggleAllRows(event: any): void {
     if (event.checked) {
       this.data.forEach(row => this.selectedRows.add(row));
     } else {
@@ -129,7 +218,10 @@ export class TableComponent implements OnInit {
         this.loadData();
         this.snackBar.open('Data deleted successfully', '', { duration: 2000 });
       },
-      (error) => console.error('Error deleting data', error)
+      (error) => {
+        console.error('Error deleting data', error);
+        this.snackBar.open('Error deleting data', '', { duration: 3000 });
+      }
     );
   }
 
@@ -140,4 +232,7 @@ export class TableComponent implements OnInit {
     return diffInDays <= 3 && diffInDays >= -3;
   }
 
+  logout(): void {
+    this.router.navigate(['/logout']); // Navigate to the logout route
+  }
 }

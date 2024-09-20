@@ -163,20 +163,33 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 //   }
 // }
 
+// @Component({
+//   selector: 'app-root',
+//   templateUrl: './app.component.html',
+//   standalone: true,
+//   imports: [ReactiveFormsModule, RouterModule, RouterOutlet],
+//   styleUrls: ['./app.component.scss']
+  
+// })
+// export class AppComponent {
+//   title = 'Name'; 
+
+//   constructor() {
+//   }
+// }
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, RouterOutlet],
+  imports: [CommonModule, RouterModule, RouterOutlet], // Make sure CommonModule is imported for common directives
   styleUrls: ['./app.component.scss']
-  
 })
 export class AppComponent {
-  title = 'Your Application Name'; 
-
-  constructor() {
-  }
+  title = 'User Data';  // Updated title to reflect the context of the app
 }
+
 
 //   form: FormGroup;
 //   isEditMode = false;

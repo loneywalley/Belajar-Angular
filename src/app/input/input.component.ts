@@ -187,7 +187,7 @@ export class InputComponent implements OnInit {
   onSuccess(message: string): void {
     // Show success message and navigate back to the main page
     this.snackBar.open(message, '', { duration: 2000 });
-    this.router.navigate(['/']);
+    this.router.navigate(['/table']);
   }
 
   logout(): void {

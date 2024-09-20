@@ -28,13 +28,15 @@ import { AuthGuard } from './guard/auth.guard';
 import { LogoutComponent } from './pages/logout/logout.component';
 
 const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: '', component: TableComponent, canActivate: [AuthGuard] },
-    { path: 'add', component: InputComponent },
-    { path: 'detail/:id', component: InputComponent },  // Corrected dynamic route
-    { path: 'detail', component: InputComponent },
+    { path: '', redirectTo: 'table',pathMatch: 'full' },
+    { path: 'login', component: LoginComponent},
+    { path: 'table', component: TableComponent, canActivate: [AuthGuard] },
+    { path: 'add', component: InputComponent, canActivate: [AuthGuard]},
+    // { path: 'detail', component: InputComponent, canActivate: [AuthGuard] },
+    { path: 'detail/:id', component: InputComponent, canActivate: [AuthGuard] },
     { path: 'logout', component: LogoutComponent},
-    { path: '**', component: NoDataPageComponent }  // Wildcard route for 404 page
+    { path: '404', component: NoDataPageComponent },
+    { path: '**', redirectTo: '404', pathMatch: 'full'}  // Wildcard route for 404 page
 ];
 
 @NgModule({
